@@ -1,0 +1,48 @@
+div.m5sblocker {
+    position: absolute;
+    top: 0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    z-index: 9;
+    
+    /*border-top: 64px solid rgba(98, 118, 167, 0.5);*/
+}
+
+/*.m5sblocker-profile-fader {
+	height: 64px;
+	background: rgba(98, 118, 167, 0.5); url('../images/bg.jpg') no-repeat left top;
+}*/
+
+.m5sblocker-inner {
+	background: rgba(245, 247, 248, 0.90);
+    display: table;
+    height: 100%;
+    width: 100%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.m5sblocker-disclaimer {
+	font-weight: bold;
+	margin-bottom: 10px;
+/*	height: 90px;
+	background: red url('/alert-icon.png');*/
+}
+
+.m5sblocker-txt {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.m5sblocker-close {
+	cursor: pointer;
+}
+
+.m5sBlockDone {
+	font-size: 14px;
+}
+
+.temp_controller {
+	background: white;
+}
