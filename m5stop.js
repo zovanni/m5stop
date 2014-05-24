@@ -69,8 +69,6 @@ $.fn.randomQuote = function() {
 		userInfo = $('.clearfix._5x46');
 	}
 	
-	
-	
 	var userInfo = this.find($(userInfo));
 	
 	element.wrapInner('<div class="temp_controller"></div>');
@@ -98,9 +96,6 @@ $.fn.randomQuote = function() {
 		//var authLink = results.titles.replace(' ', '+')
 		
 		var str = '<span class="m5sblock-quote">'+results.quote+'</span><br><br>('+results.titles+')';
-		
-		
-		
 		
 		var html = $.parseHTML( str );
 		element.find('.userContentWrapper').append( html );
@@ -236,9 +231,10 @@ $.fn.block = function() {
 	if (
 		!this.hasClass('m5sblocked')
 		&&
-		this.not(':has(.m5sblocked)')
+		!this.parents('.m5sblocked').length > 0
 		) {
-	
+
+		
 		this.addClass('m5sblocked').prepend(blocker);
 		
 		this.find('.m5sblocker-close').click(function () {
