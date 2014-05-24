@@ -1,8 +1,12 @@
 {
 	"name": "M5Stop",
 	"manifest_version": 2,
-	"version": "1.0",
+	"version": "1.0.1",
 	"description": "Rimuove la spazzatura Grillesca dalla timeline facebook",
+	
+	"icons": { "16": "icon16.png",
+	           "48": "icon48.png",
+	          "128": "icon128.png" },
 		  	  
 	"content_scripts": [
 	{	
@@ -29,5 +33,8 @@
 	],
 	
 	
-	"web_accessible_resources": ["alert-icon.png"]
+	"web_accessible_resources": [
+		"images/icon48.png",
+		"images/icon128.png"
+	]
 }
