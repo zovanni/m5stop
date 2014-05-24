@@ -25,12 +25,14 @@ MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 		/\b(renzie)\b/gi,
 		/\b(5 stelle)\b/gi,
 		/\b(5stelle)\b/gi,
+		/\b(cinque )?(stelle)\b/gi,
+		/\b(cinquestelle)\b/gi,
 		/\b(casaleggio)\b/gi,
 		/\b(luigi )?(di maio)\b/gi,
 		/\b(giulia )?(sarti)\b/gi,
 		/\b(vito )?(crimi)\b/gi,
 		/\b(mattia )?(calise)\b/gi
-//		/\b(paola )?(taverna)\b/gi,
+		/\b(paola )?(taverna)\b/gi
 //		/\b(vinciamonoi)\b/gi,
 //		/\b(pidimenoelle)\b/gi
 	];
