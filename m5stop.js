@@ -263,29 +263,42 @@ $.fn.block = function() {
 
 var observer = new MutationObserver(function (mutations) {
 
-	if ($('body').hasClass('home')) {
+	if ($('body').is('.home')) {
 		//definisco i contenitori dei post
 		var wallItem = $('.userContentWrapper');
 		var container = $('.userContentWrapper');
 	}
-
-	else if ($('body').hasClass('timelineLayout')) {
+	
+	else if (
+		$('body').is('.timelineLayout')
+		&&
+		$('body').is('.pagesTimelineLayout')
+	) {
+		console.log('new layout')
+		var wallItem = $('.timelineUnitContainer');
+		var container = $('.timelineUnitContainer');
+	}
+	
+	else if ($('body').is('.timelineLayout')) {
 		var wallItem = $('.userContentWrapper, .fbTimelineUnit');
 		var container = $('.fbTimelineUnit');
 	}
 
-	else if ($('body').hasClass('pagesTimelineLayout')) {
+	else if ($('body').is('.pagesTimelineLayout')) {
 		var wallItem = $('.timelineUnitContainer');
 		var container = $('.timelineUnitContainer');
 	}
+	
+	
 
-	else {
-		var wallItem = $('.userContentWrapper');
-		var container = $('.userContentWrapper');
-	}
+//	else {
+//		var wallItem = $('.userContentWrapper');
+//		var container = $('.userContentWrapper');
+//	}
 
 	
 	wallItem.each(function () {
+		//console.log('--')
 		var element = $(this);
 		
 		$.each( keywords, function( key, value ) {

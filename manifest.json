@@ -1,7 +1,7 @@
 {
 	"name": "M5Stop",
 	"manifest_version": 2,
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"description": "Rimuove la spazzatura Grillesca dalla timeline facebook",
 	
 	"icons": { "16": "icon16.png",
@@ -29,7 +29,9 @@
 		"https://*.wikiquote.org/*",
 		"https://it.wikiquote.org/w/api.php*",
 		"https://it.wikiquote.org/w/api?*",
-		"http://*/"
+		"http://*/",
+		"https://www.google-analytics.com/",
+		"storage"
 	],
 	
 	
