@@ -23,6 +23,12 @@ div.m5sblocker {
     text-align: center;
 }
 
+.timelineUnitContainer .timelineUnitContainer.m5stopped {
+	padding: 0;
+	border: 0;
+	
+}
+
 .m5sblocker-disclaimer {
 	font-weight: bold;
 	margin-bottom: 10px;

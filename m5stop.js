@@ -41,7 +41,7 @@ MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 	
 	var newPost =
 			'<div class="topBorder"></div>'+
-			'<div class="timelineUnitContainer">'+
+			'<div class="timelineUnitContainer m5stopped">'+
 				'<div role="article">'+
 					'<div class="userContentWrapper m5sBlockDone"></div>'+
 				'</div>'+	
@@ -228,14 +228,15 @@ $.fn.randomQuote = function() {
 
 
 	
-$.fn.block = function() {
+$.fn.block = function(container) {
+	var container = container;
+	//console.log('container: '+$(container))
 	var current = this
 	if (
 		!this.hasClass('m5sblocked')
 		&&
 		!this.parents('.m5sblocked').length > 0
 		) {
-
 		
 		this.addClass('m5sblocked').prepend(blocker);
 		
@@ -246,8 +247,6 @@ $.fn.block = function() {
 			},150,function () {
 				$(this).closest('div.m5sblocker').remove()
 			})
-			
-						
 			
 		})
 		
@@ -263,40 +262,37 @@ $.fn.block = function() {
 
 var observer = new MutationObserver(function (mutations) {
 
-	if ($('body').is('.home')) {
+	if ($('body').hasClass('home')) {
 		//definisco i contenitori dei post
 		var wallItem = $('.userContentWrapper');
 		var container = $('.userContentWrapper');
 	}
 	
 	else if (
-		$('body').is('.timelineLayout')
+		$('body').hasClass('timelineLayout')
 		&&
-		$('body').is('.pagesTimelineLayout')
+		$('body').hasClass('pagesTimelineLayout')
 	) {
-		console.log('new layout')
+		//console.log('new layout')
 		var wallItem = $('.timelineUnitContainer');
 		var container = $('.timelineUnitContainer');
 	}
 	
-	else if ($('body').is('.timelineLayout')) {
+	else if ($('body').hasClass('timelineLayout')) {
 		var wallItem = $('.userContentWrapper, .fbTimelineUnit');
 		var container = $('.fbTimelineUnit');
 	}
-
-	else if ($('body').is('.pagesTimelineLayout')) {
+	
+	else if ($('body').hasClass('pagesTimelineLayout')) {
 		var wallItem = $('.timelineUnitContainer');
 		var container = $('.timelineUnitContainer');
 	}
 	
-	
+	else {
+		var wallItem = $('.userContentWrapper');
+		var container = $('.userContentWrapper');
+	}
 
-//	else {
-//		var wallItem = $('.userContentWrapper');
-//		var container = $('.userContentWrapper');
-//	}
-
-	
 	wallItem.each(function () {
 		//console.log('--')
 		var element = $(this);
@@ -308,23 +304,35 @@ var observer = new MutationObserver(function (mutations) {
 			element.contents().filter(function(value) {
 			    //return (rSearchTerm).test($(this).text()); // return every match as jQuery obj
 			    return (rSearchTerm).test($(this).text()); // return every match as jQuery obj
-			}).closest(container).block(); // <--example, do your stuff here.
+			}).closest(container).block(container); // <--example, do your stuff here.
 			
 		});
-		
-		
-		
 	})
 	
 });
 
 
-
-observer.observe(document.body, {
-    childList: true,
-    attributes: false,
-    characterData: true,
-    subtree: true
-});
-
+// select the target node
+var target = document.querySelector('#globalContainer');
+ 
+// create an observer instance
+//var observer = new MutationObserver(function(mutations) {
+//  mutations.forEach(function(mutation) {
+//    console.log(mutation.type);
+//  });    
+//});
+ 
+// configuration of the observer:
+var config = { 
+	childList: true,
+	attributes: false,
+	characterData: true,
+	subtree: true
+};
+ 
+// pass in the target node, as well as the observer options
+observer.observe(target, config);
+ 
+// later, you can stop observing
+//observer.disconnect();
 
