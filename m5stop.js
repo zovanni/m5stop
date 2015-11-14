@@ -240,7 +240,6 @@ $.fn.block = function(container) {
 		this.addClass('m5sblocked').prepend(blocker);
 		
 		this.find('.m5sblocker-close').click(function () {
-			
 			$(this).closest('div.m5sblocker').animate({
 				'opacity' :0
 			},150,function () {

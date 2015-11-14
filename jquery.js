@@ -12,6 +12,7 @@
  * Date: 2013-05-30T21:25Z
  */
 (function( window, undefined ) {
+	
 
 // Can't do this because several apps including ASP.NET trace
 // the stack via arguments.caller.callee and Firefox dies if
