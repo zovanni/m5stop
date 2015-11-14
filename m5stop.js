@@ -41,7 +41,7 @@ MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 	
 	var newPost =
 			'<div class="topBorder"></div>'+
-			'<div class="timelineUnitContainer m5stopped">'+
+			'<div class="m5stopped">'+
 				'<div role="article">'+
 					'<div class="userContentWrapper m5sBlockDone"></div>'+
 				'</div>'+	
@@ -55,21 +55,22 @@ MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 $.fn.randomQuote = function() {
 	var element = this;
 	
-	if ($('body').hasClass('home')) {
-		userInfo = $('.clearfix._5x46');
-	}
+//	userInfo = $('.clearfix._5x46');
+//	switch(true) {
+//	    case ($('body').hasClass('home')):
+//			userInfo = $('.clearfix._5x46');
+//	        break;
+//	    case ($('body').hasClass('timelineLayout')):
+//			userInfo = $('.mbs.pbs._1_m');
+//	        break;
+//	    case ($('body').hasClass('timelineLayout') && $('body').hasClass('pagesTimelineLayout')):
+//	        userInfo = $('.clearfix._5x46');
+//	        break;
+//	    case ($('body').hasClass('pagesTimelineLayout')):
+//	        userInfo = $('.clearfix._5x46');
+//	}
 	
-	else if ($('body').hasClass('timelineLayout')) {
-		userInfo = $('.mbs.pbs._1_m');
-	}
-	
-	else if ($('body').hasClass('pagesTimelineLayout')) {
-		userInfo = $('.clearfix._5x46');
-	}
-	
-	else {
-		userInfo = $('.clearfix._5x46');
-	}
+	userInfo = $('.clearfix._5x46');
 	
 	var userInfo = this.find($(userInfo));
 	
@@ -93,7 +94,7 @@ $.fn.randomQuote = function() {
 		var curHeight = old.height();
 		old.css('height', 'auto');
 		
-		old.append(newPost).css({'opacity' : '0'}).find('.timelineUnitContainer').prepend(userInfo);
+		old.append(newPost).css({'opacity' : '0'}).find('.m5stopped').prepend(userInfo);
 		
 		//var authLink = results.titles.replace(' ', '+')
 		
@@ -113,7 +114,6 @@ $.fn.randomQuote = function() {
 		//se è vuota recuperane un altra
 		if (old.find('.m5sblock-quote').text() == 'undefined') {
 			console.log('quote undefined, restart...')
-			
 			element.randomQuote()
 			
 		}
@@ -230,8 +230,7 @@ $.fn.randomQuote = function() {
 	
 $.fn.block = function(container) {
 	var container = container;
-	//console.log('container: '+$(container))
-	var current = this
+	var current = this;
 	if (
 		!this.hasClass('m5sblocked')
 		&&
@@ -262,53 +261,45 @@ $.fn.block = function(container) {
 
 var observer = new MutationObserver(function (mutations) {
 
-	if ($('body').hasClass('home')) {
-		//definisco i contenitori dei post
-		var wallItem = $('.userContentWrapper');
-		var container = $('.userContentWrapper');
+	var wallItem = $('.userContentWrapper');
+	var container = wallItem.parent();
+	
+	switch(true) {
+	    case ($('body').hasClass('home')):
+    		var wallItem = $('.userContentWrapper');
+    		var container = $('.userContentWrapper');
+	        break;
+	    case ($('body').hasClass('timelineLayout')):
+	       //console.log('timelineLayout')
+   			var wallItem = $('.userContentWrapper');
+   			var container = wallItem.parent();
+   			//var container = $('.userContentWrapper');
+			var container = $('.fbTimelineUnit, ._4-u2.mbm');
+	        break;
+	    case ($('body').hasClass('timelineLayout') && $('body').hasClass('pagesTimelineLayout')):
+	        //console.log('pagesTimelineLayout')
+			var wallItem = $('.timelineUnitContainer');
+			var container = $('.timelineUnitContainer');
+	        break;
+	    case ($('body').hasClass('pagesTimelineLayout')):
+	        var wallItem = $('.userContentWrapper');
+			var container = wallItem.parent();
 	}
 	
-	else if (
-		$('body').hasClass('timelineLayout')
-		&&
-		$('body').hasClass('pagesTimelineLayout')
-	) {
-		//console.log('new layout')
-		var wallItem = $('.timelineUnitContainer');
-		var container = $('.timelineUnitContainer');
-	}
-	
-	else if ($('body').hasClass('timelineLayout')) {
-		var wallItem = $('.userContentWrapper, .fbTimelineUnit');
-		var container = $('.fbTimelineUnit');
-	}
-	
-	else if ($('body').hasClass('pagesTimelineLayout')) {
-		var wallItem = $('.timelineUnitContainer');
-		var container = $('.timelineUnitContainer');
-	}
-	
-	else {
-		var wallItem = $('.userContentWrapper');
-		var container = $('.userContentWrapper');
-	}
-
 	wallItem.each(function () {
 		//console.log('--')
 		var element = $(this);
-		
+		//console.log(element);
 		$.each( keywords, function( key, value ) {
 			//console.log($this);
 			var rSearchTerm = new RegExp(value);
 			//console.log($this)
 			element.contents().filter(function(value) {
-			    //return (rSearchTerm).test($(this).text()); // return every match as jQuery obj
+				//element.css({'background':'red'})
 			    return (rSearchTerm).test($(this).text()); // return every match as jQuery obj
-			}).closest(container).block(container); // <--example, do your stuff here.
-			
+			}).closest(container).block($(container)); // <--example, do your stuff here.
 		});
 	})
-	
 });
 
 
